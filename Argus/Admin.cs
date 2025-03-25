@@ -16,5 +16,12 @@ namespace Argus
         {
             InitializeComponent();
         }
+
+        private void btn_register_acc_Click(object sender, EventArgs e)
+        {
+            RegistrationForm registrationform = new RegistrationForm();
+            registrationform.Show();
+            this.Hide();
+        }
     }
 }

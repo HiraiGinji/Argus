@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.header = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.lbl_username = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_register_acc = new System.Windows.Forms.Button();
             this.header.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,17 +45,6 @@
             this.header.Size = new System.Drawing.Size(1352, 80);
             this.header.TabIndex = 8;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Renatha Signature", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 66);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Argus";
-            // 
             // lbl_username
             // 
             this.lbl_username.AutoSize = true;
@@ -66,11 +56,34 @@
             this.lbl_username.TabIndex = 9;
             this.lbl_username.Text = "username";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Renatha Signature", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(136, 66);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Argus";
+            // 
+            // btn_register_acc
+            // 
+            this.btn_register_acc.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_register_acc.Location = new System.Drawing.Point(0, 86);
+            this.btn_register_acc.Name = "btn_register_acc";
+            this.btn_register_acc.Size = new System.Drawing.Size(204, 50);
+            this.btn_register_acc.TabIndex = 9;
+            this.btn_register_acc.Text = "REGISTER ACC";
+            this.btn_register_acc.UseVisualStyleBackColor = true;
+            this.btn_register_acc.Click += new System.EventHandler(this.btn_register_acc_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.btn_register_acc);
             this.Controls.Add(this.header);
             this.Name = "Admin";
             this.Text = "Form1";
@@ -85,6 +98,7 @@
         private System.Windows.Forms.Panel header;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label lbl_username;
+        private System.Windows.Forms.Button btn_register_acc;
     }
 }
 
