@@ -55,6 +55,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbl_cart = new System.Windows.Forms.DataGridView();
+            this.rb_cash = new System.Windows.Forms.RadioButton();
+            this.rb_gcash = new System.Windows.Forms.RadioButton();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbl_change = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tb_money = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -94,10 +102,15 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.txt_Barcode);
-            this.panel2.Controls.Add(this.CameraListbox);
+            this.panel2.Controls.Add(this.tb_money);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.lbl_change);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.rb_gcash);
+            this.panel2.Controls.Add(this.rb_cash);
+            this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.cb_discount);
-            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.lbl_total);
             this.panel2.Controls.Add(this.lbl_discount);
@@ -119,7 +132,7 @@
             // 
             this.txt_Barcode.Enabled = false;
             this.txt_Barcode.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Barcode.Location = new System.Drawing.Point(21, 397);
+            this.txt_Barcode.Location = new System.Drawing.Point(488, 604);
             this.txt_Barcode.Name = "txt_Barcode";
             this.txt_Barcode.Size = new System.Drawing.Size(285, 35);
             this.txt_Barcode.TabIndex = 114;
@@ -130,7 +143,7 @@
             this.CameraListbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CameraListbox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CameraListbox.FormattingEnabled = true;
-            this.CameraListbox.Location = new System.Drawing.Point(22, 275);
+            this.CameraListbox.Location = new System.Drawing.Point(490, 510);
             this.CameraListbox.Name = "CameraListbox";
             this.CameraListbox.Size = new System.Drawing.Size(285, 38);
             this.CameraListbox.TabIndex = 115;
@@ -146,15 +159,15 @@
             "Regular",
             "PWD",
             "Senior Citizen"});
-            this.cb_discount.Location = new System.Drawing.Point(136, 495);
+            this.cb_discount.Location = new System.Drawing.Point(144, 426);
             this.cb_discount.Name = "cb_discount";
-            this.cb_discount.Size = new System.Drawing.Size(177, 33);
+            this.cb_discount.Size = new System.Drawing.Size(163, 33);
             this.cb_discount.TabIndex = 78;
             this.cb_discount.SelectedIndexChanged += new System.EventHandler(this.cb_discount_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(22, 303);
+            this.pictureBox1.Location = new System.Drawing.Point(488, 510);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(285, 129);
             this.pictureBox1.TabIndex = 113;
@@ -168,7 +181,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(16, 495);
+            this.label15.Location = new System.Drawing.Point(18, 429);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(105, 25);
             this.label15.TabIndex = 77;
@@ -182,11 +195,13 @@
             this.lbl_total.BackColor = System.Drawing.Color.Transparent;
             this.lbl_total.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.lbl_total.ForeColor = System.Drawing.Color.White;
-            this.lbl_total.Location = new System.Drawing.Point(192, 237);
+            this.lbl_total.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbl_total.Location = new System.Drawing.Point(211, 205);
             this.lbl_total.Name = "lbl_total";
             this.lbl_total.Size = new System.Drawing.Size(96, 25);
             this.lbl_total.TabIndex = 76;
             this.lbl_total.Text = "0000000";
+            this.lbl_total.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbl_discount
             // 
@@ -195,11 +210,13 @@
             this.lbl_discount.BackColor = System.Drawing.Color.Transparent;
             this.lbl_discount.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.lbl_discount.ForeColor = System.Drawing.Color.White;
-            this.lbl_discount.Location = new System.Drawing.Point(192, 197);
+            this.lbl_discount.Location = new System.Drawing.Point(222, 164);
             this.lbl_discount.Name = "lbl_discount";
+            this.lbl_discount.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbl_discount.Size = new System.Drawing.Size(66, 25);
             this.lbl_discount.TabIndex = 75;
             this.lbl_discount.Text = "------";
+            this.lbl_discount.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lbl_subtotal
             // 
@@ -208,20 +225,22 @@
             this.lbl_subtotal.BackColor = System.Drawing.Color.Transparent;
             this.lbl_subtotal.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.lbl_subtotal.ForeColor = System.Drawing.Color.White;
-            this.lbl_subtotal.Location = new System.Drawing.Point(192, 151);
+            this.lbl_subtotal.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbl_subtotal.Location = new System.Drawing.Point(209, 122);
             this.lbl_subtotal.Name = "lbl_subtotal";
-            this.lbl_subtotal.Size = new System.Drawing.Size(96, 25);
+            this.lbl_subtotal.Size = new System.Drawing.Size(66, 25);
             this.lbl_subtotal.TabIndex = 73;
-            this.lbl_subtotal.Text = "0000000";
+            this.lbl_subtotal.Text = "00.00";
+            this.lbl_subtotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tb_customer
             // 
             this.tb_customer.BackColor = System.Drawing.SystemColors.Control;
             this.tb_customer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tb_customer.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
-            this.tb_customer.Location = new System.Drawing.Point(136, 448);
+            this.tb_customer.Location = new System.Drawing.Point(144, 365);
             this.tb_customer.Name = "tb_customer";
-            this.tb_customer.Size = new System.Drawing.Size(177, 33);
+            this.tb_customer.Size = new System.Drawing.Size(163, 33);
             this.tb_customer.TabIndex = 72;
             this.tb_customer.TextChanged += new System.EventHandler(this.tb_customer_TextChanged);
             // 
@@ -245,7 +264,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(16, 450);
+            this.label10.Location = new System.Drawing.Point(18, 367);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 25);
             this.label10.TabIndex = 65;
@@ -258,7 +277,7 @@
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(16, 237);
+            this.label9.Location = new System.Drawing.Point(17, 205);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 25);
             this.label9.TabIndex = 64;
@@ -270,7 +289,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(17, 197);
+            this.label8.Location = new System.Drawing.Point(16, 164);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 25);
             this.label8.TabIndex = 63;
@@ -282,7 +301,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(16, 151);
+            this.label6.Location = new System.Drawing.Point(15, 122);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 25);
             this.label6.TabIndex = 61;
@@ -408,6 +427,110 @@
             this.tbl_cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_cart_CellContentClick);
             this.tbl_cart.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_cart_CellDoubleClick);
             // 
+            // rb_cash
+            // 
+            this.rb_cash.AutoSize = true;
+            this.rb_cash.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.rb_cash.ForeColor = System.Drawing.Color.White;
+            this.rb_cash.Location = new System.Drawing.Point(127, 316);
+            this.rb_cash.Name = "rb_cash";
+            this.rb_cash.Size = new System.Drawing.Size(87, 29);
+            this.rb_cash.TabIndex = 117;
+            this.rb_cash.TabStop = true;
+            this.rb_cash.Text = "CASH";
+            this.rb_cash.UseVisualStyleBackColor = true;
+            // 
+            // rb_gcash
+            // 
+            this.rb_gcash.AutoSize = true;
+            this.rb_gcash.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.rb_gcash.ForeColor = System.Drawing.Color.White;
+            this.rb_gcash.Location = new System.Drawing.Point(217, 316);
+            this.rb_gcash.Name = "rb_gcash";
+            this.rb_gcash.Size = new System.Drawing.Size(105, 29);
+            this.rb_gcash.TabIndex = 118;
+            this.rb_gcash.TabStop = true;
+            this.rb_gcash.Text = "GCASH";
+            this.rb_gcash.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(20, 267);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(287, 25);
+            this.label7.TabIndex = 119;
+            this.label7.Text = "_________________________";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(17, 242);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 25);
+            this.label11.TabIndex = 120;
+            this.label11.Text = "Change:";
+            // 
+            // lbl_change
+            // 
+            this.lbl_change.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lbl_change.AutoSize = true;
+            this.lbl_change.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_change.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.lbl_change.ForeColor = System.Drawing.Color.White;
+            this.lbl_change.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbl_change.Location = new System.Drawing.Point(212, 242);
+            this.lbl_change.Name = "lbl_change";
+            this.lbl_change.Size = new System.Drawing.Size(66, 25);
+            this.lbl_change.TabIndex = 121;
+            this.lbl_change.Text = "00.00";
+            this.lbl_change.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(17, 318);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(108, 25);
+            this.label13.TabIndex = 116;
+            this.label13.Text = "Payment:";
+            this.label13.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(18, 489);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 25);
+            this.label14.TabIndex = 122;
+            this.label14.Text = "Money:";
+            // 
+            // tb_money
+            // 
+            this.tb_money.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
+            this.tb_money.ForeColor = System.Drawing.Color.Black;
+            this.tb_money.Location = new System.Drawing.Point(144, 486);
+            this.tb_money.Name = "tb_money";
+            this.tb_money.Size = new System.Drawing.Size(163, 33);
+            this.tb_money.TabIndex = 123;
+            this.tb_money.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tb_money.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_money_KeyPress);
+            // 
             // POS_SystemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,9 +538,13 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tbl_cart);
+            this.Controls.Add(this.txt_Barcode);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.CameraListbox);
             this.Name = "POS_SystemControl";
             this.Size = new System.Drawing.Size(1121, 655);
             this.Load += new System.EventHandler(this.POS_SystemControl_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.POS_SystemControl_KeyDown);
             this.Leave += new System.EventHandler(this.POS_SystemControl_Leave);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -428,6 +555,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_cart)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -460,5 +588,13 @@
         private System.Windows.Forms.DataGridView tbl_cart;
         private System.Windows.Forms.ComboBox CameraListbox;
         private System.Windows.Forms.TextBox txt_Barcode;
+        private System.Windows.Forms.RadioButton rb_gcash;
+        private System.Windows.Forms.RadioButton rb_cash;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbl_change;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tb_money;
     }
 }

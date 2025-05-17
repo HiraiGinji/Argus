@@ -21,6 +21,7 @@ namespace Argus
 
         private void User_Load(object sender, EventArgs e)
         {
+
             SidebarExtend = Sidebar.Width == Sidebar.MaximumSize.Width;
             addProdBtn();
         }

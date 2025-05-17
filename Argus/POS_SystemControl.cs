@@ -38,6 +38,27 @@ namespace Argus
 
         private void btn_pay_Click(object sender, EventArgs e)
         {
+
+            if (rb_cash.Checked)
+            {
+                if (string.IsNullOrWhiteSpace(tb_money.Text))
+                {
+                    MessageBox.Show("Please enter cash amount", "Payment Error",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_money.Focus();
+                    return;
+                }
+
+                if (!decimal.TryParse(tb_money.Text, out decimal moneyGiven) ||
+                    moneyGiven < decimal.Parse(lbl_total.Text))
+                {
+                    MessageBox.Show("Insufficient payment amount", "Payment Error",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_money.Focus();
+                    return;
+                }
+            }
+
             string customer = tb_customer.Text ?? "none";
             payBtnFunc(customer);
 
@@ -183,7 +204,36 @@ namespace Argus
 
         private void POS_SystemControl_Load(object sender, EventArgs e)
         {
+
             ClearCart();
+            lbl_total.AutoSize = false;
+            lbl_total.Width = 100;
+            lbl_total.TextAlign = ContentAlignment.MiddleRight;
+            lbl_total.Anchor = AnchorStyles.Top | AnchorStyles.Right; lbl_change.TextAlign = ContentAlignment.MiddleRight;
+
+
+            lbl_subtotal.AutoSize = false;
+            lbl_subtotal.Width = 100;
+            lbl_subtotal.TextAlign = ContentAlignment.MiddleRight;
+            lbl_subtotal.Anchor = AnchorStyles.Top | AnchorStyles.Right; lbl_change.TextAlign = ContentAlignment.MiddleRight;
+
+            lbl_change.AutoSize = false;
+            lbl_change.Width = 100;
+            lbl_change.TextAlign = ContentAlignment.MiddleRight;
+            lbl_change.Anchor = AnchorStyles.Top | AnchorStyles.Right; lbl_change.TextAlign = ContentAlignment.MiddleRight;
+
+
+            tb_money.TextAlign = HorizontalAlignment.Right;
+            tb_money.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
+            rb_cash.CheckedChanged += PaymentMethodChanged;
+            rb_gcash.CheckedChanged += PaymentMethodChanged;
+            tb_money.TextChanged += CalculateChange;
+
+            rb_cash.Checked = true;
+            tb_money.Visible = true;
+            lbl_change.Visible = true;
+
             pictureBox1.Visible = false;
             txt_Barcode.Visible = false;
             CameraListbox.Visible = false;
@@ -204,7 +254,6 @@ namespace Argus
             tbl_cart.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             tbl_cart.AutoSize = false;
 
-            pictureBox1.Visible = true;
             FIC = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo device in FIC)
             {
@@ -226,6 +275,11 @@ namespace Argus
 
                 enterProduct();
                 lbl_itemPrice.Text = connect.getPrice(pid);
+            }
+
+            else if (e.Control && e.KeyCode == Keys.A)
+            {
+                tb_pid.SelectAll();
             }
         }
 
@@ -403,6 +457,77 @@ namespace Argus
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void PaymentMethodChanged(object sender, EventArgs e)
+        {
+            if (rb_cash.Checked)
+            {
+                tb_money.Visible = true;
+                lbl_change.Visible = true;
+                tb_money.Focus();
+            }
+            else if (rb_gcash.Checked)
+            {
+                tb_money.Visible = false;
+                lbl_change.Visible = false;
+                lbl_change.Text = "0.00";
+            }
+        }
+
+        private void CalculateChange(object sender, EventArgs e)
+        {
+            if (!rb_cash.Checked) return;
+
+            if (decimal.TryParse(tb_money.Text, out decimal moneyGiven) &&
+                decimal.TryParse(lbl_total.Text, out decimal totalAmount))
+            {
+                if (moneyGiven >= totalAmount)
+                {
+                    decimal change = moneyGiven - totalAmount;
+                    lbl_change.Text = change.ToString("0.00");
+                }
+                else
+                {
+                    lbl_change.Text = "Insufficient";
+                }
+            }
+            else
+            {
+                lbl_change.Text = "Invalid";
+            }
+        }
+
+        private void tb_money_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void POS_SystemControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                tb_pid.Focus();
+                e.Handled = true;
+            }
         }
     }
 }

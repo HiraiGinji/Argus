@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbl_discountpercent = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -52,11 +52,11 @@
             this.lbl_discountpercent.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_discountpercent.AutoSize = true;
             this.lbl_discountpercent.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_discountpercent.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_discountpercent.ForeColor = System.Drawing.Color.Black;
+            this.lbl_discountpercent.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_discountpercent.ForeColor = System.Drawing.Color.White;
             this.lbl_discountpercent.Location = new System.Drawing.Point(485, 147);
             this.lbl_discountpercent.Name = "lbl_discountpercent";
-            this.lbl_discountpercent.Size = new System.Drawing.Size(83, 37);
+            this.lbl_discountpercent.Size = new System.Drawing.Size(80, 32);
             this.lbl_discountpercent.TabIndex = 99;
             this.lbl_discountpercent.Text = "------";
             // 
@@ -64,11 +64,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(12, 147);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(162, 37);
+            this.label6.Size = new System.Drawing.Size(156, 32);
             this.label6.TabIndex = 98;
             this.label6.Text = "DISCOUNT:";
             // 
@@ -76,11 +76,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(14, 98);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(169, 37);
+            this.label5.Size = new System.Drawing.Size(163, 32);
             this.label5.TabIndex = 97;
             this.label5.Text = "CUSTOMER:";
             // 
@@ -89,11 +89,11 @@
             this.lbl_discount_receipt.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_discount_receipt.AutoSize = true;
             this.lbl_discount_receipt.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_discount_receipt.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_discount_receipt.ForeColor = System.Drawing.Color.Black;
+            this.lbl_discount_receipt.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_discount_receipt.ForeColor = System.Drawing.Color.White;
             this.lbl_discount_receipt.Location = new System.Drawing.Point(180, 147);
             this.lbl_discount_receipt.Name = "lbl_discount_receipt";
-            this.lbl_discount_receipt.Size = new System.Drawing.Size(119, 37);
+            this.lbl_discount_receipt.Size = new System.Drawing.Size(122, 32);
             this.lbl_discount_receipt.TabIndex = 96;
             this.lbl_discount_receipt.Text = "XXXXXX";
             this.lbl_discount_receipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,11 +103,11 @@
             this.lbl_customer_receipt.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_customer_receipt.AutoSize = true;
             this.lbl_customer_receipt.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_customer_receipt.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_customer_receipt.ForeColor = System.Drawing.Color.Black;
+            this.lbl_customer_receipt.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_customer_receipt.ForeColor = System.Drawing.Color.White;
             this.lbl_customer_receipt.Location = new System.Drawing.Point(185, 98);
             this.lbl_customer_receipt.Name = "lbl_customer_receipt";
-            this.lbl_customer_receipt.Size = new System.Drawing.Size(187, 37);
+            this.lbl_customer_receipt.Size = new System.Drawing.Size(194, 32);
             this.lbl_customer_receipt.TabIndex = 95;
             this.lbl_customer_receipt.Text = "XXXXXXXXXX";
             this.lbl_customer_receipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -117,23 +117,24 @@
             this.lbl_total_receipt.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_total_receipt.AutoSize = true;
             this.lbl_total_receipt.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_total_receipt.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_total_receipt.ForeColor = System.Drawing.Color.Black;
-            this.lbl_total_receipt.Location = new System.Drawing.Point(465, 202);
+            this.lbl_total_receipt.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_total_receipt.ForeColor = System.Drawing.Color.White;
+            this.lbl_total_receipt.Location = new System.Drawing.Point(465, 210);
             this.lbl_total_receipt.Name = "lbl_total_receipt";
-            this.lbl_total_receipt.Size = new System.Drawing.Size(122, 37);
+            this.lbl_total_receipt.Size = new System.Drawing.Size(119, 32);
             this.lbl_total_receipt.TabIndex = 94;
             this.lbl_total_receipt.Text = "0000000";
+            this.lbl_total_receipt.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(376, 202);
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(376, 210);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 37);
+            this.label9.Size = new System.Drawing.Size(82, 32);
             this.label9.TabIndex = 93;
             this.label9.Text = "Total:";
             // 
@@ -142,11 +143,11 @@
             this.lbl_date_receipt.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbl_date_receipt.AutoSize = true;
             this.lbl_date_receipt.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_date_receipt.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_date_receipt.ForeColor = System.Drawing.Color.Black;
+            this.lbl_date_receipt.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_date_receipt.ForeColor = System.Drawing.Color.White;
             this.lbl_date_receipt.Location = new System.Drawing.Point(109, 48);
             this.lbl_date_receipt.Name = "lbl_date_receipt";
-            this.lbl_date_receipt.Size = new System.Drawing.Size(159, 37);
+            this.lbl_date_receipt.Size = new System.Drawing.Size(156, 32);
             this.lbl_date_receipt.TabIndex = 92;
             this.lbl_date_receipt.Text = "0000-00-00";
             this.lbl_date_receipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -155,11 +156,11 @@
             // 
             this.lbl_transaction_receipt.AutoSize = true;
             this.lbl_transaction_receipt.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_transaction_receipt.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_transaction_receipt.ForeColor = System.Drawing.Color.Black;
+            this.lbl_transaction_receipt.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_transaction_receipt.ForeColor = System.Drawing.Color.White;
             this.lbl_transaction_receipt.Location = new System.Drawing.Point(356, 9);
             this.lbl_transaction_receipt.Name = "lbl_transaction_receipt";
-            this.lbl_transaction_receipt.Size = new System.Drawing.Size(122, 37);
+            this.lbl_transaction_receipt.Size = new System.Drawing.Size(119, 32);
             this.lbl_transaction_receipt.TabIndex = 91;
             this.lbl_transaction_receipt.Text = "0000000";
             // 
@@ -167,11 +168,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 48);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 37);
+            this.label2.Size = new System.Drawing.Size(86, 32);
             this.label2.TabIndex = 90;
             this.label2.Text = "DATE:";
             // 
@@ -179,11 +180,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(338, 37);
+            this.label1.Size = new System.Drawing.Size(322, 32);
             this.label1.TabIndex = 89;
             this.label1.Text = "TRANSACTION NUMBER:";
             // 
@@ -192,52 +193,53 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Snow;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeight = 35;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ScrollBar;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ScrollBar;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 343);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 343);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(587, 321);
+            this.dataGridView1.Size = new System.Drawing.Size(572, 303);
             this.dataGridView1.TabIndex = 88;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Orange;
-            this.panel1.Location = new System.Drawing.Point(-447, 254);
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(12, 254);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1043, 83);
+            this.panel1.Size = new System.Drawing.Size(572, 83);
             this.panel1.TabIndex = 87;
             // 
             // Receipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(590, 658);
             this.Controls.Add(this.lbl_discountpercent);
             this.Controls.Add(this.label6);
