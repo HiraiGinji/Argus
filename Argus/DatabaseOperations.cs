@@ -209,7 +209,7 @@ namespace Argus
             return inv;
         }
 
-        private string GenerateProductID(string name)
+        public string GenerateProductID(string name)
         {
             string prefix = new string(name
                 .Where(char.IsLetterOrDigit)
@@ -218,7 +218,7 @@ namespace Argus
                 .ToUpper();
 
             Random rnd = new Random();
-            int randomNumber = rnd.Next(1000, 9999);
+            int randomNumber = rnd.Next(100, 1000);
 
             return prefix + randomNumber;
         }
@@ -782,19 +782,34 @@ namespace Argus
 
         public string getPrice(string pid)
         {
-            OpenConnection();
+            try
+            {
+                OpenConnection();
 
-            MySqlCommand cmd = new MySqlCommand($"SELECT TOTAL FROM POS_CART WHERE PID = '{pid}'", connection);
-            MySqlDataReader totalRead = cmd.ExecuteReader();
+                MySqlCommand cmd = new MySqlCommand($"SELECT TOTAL FROM POS_CART WHERE PID = @pid", connection);
+                cmd.Parameters.AddWithValue("@pid", pid);
 
-            totalRead.Read();
-
-            string itemPrice = totalRead["TOTAL"].ToString();
-
-            totalRead.Close();
-            CloseConnection();
-
-            return itemPrice;
+                using (MySqlDataReader totalRead = cmd.ExecuteReader())
+                {
+                    if (totalRead.Read())
+                    {
+                        return totalRead["TOTAL"].ToString();
+                    }
+                    else
+                    {
+                        return "0";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting price: {ex.Message}");
+                return "0";
+            }
+            finally
+            {
+                CloseConnection();
+            }
         }
         public void transferTransaction(string transactionid, string customer, string discount, decimal subtotal, decimal total)
         {
@@ -818,7 +833,7 @@ namespace Argus
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Transfer failed: " + ex.Message);
+                MessageBox.Show("q: " + ex.Message);
             }
             finally
             {
@@ -878,6 +893,81 @@ namespace Argus
                 MessageBox.Show(ex.Message);
             }
             finally { CloseConnection(); }
+        }
+        public DataTable GetReceiptData(string transactionId)
+        {
+            DataTable receiptData = new DataTable();
+            try
+            {
+                OpenConnection();
+                string query = "SELECT pname as 'Product', quantity as 'Qty', price as 'Price', total as 'Total' FROM pos_cart WHERE TRANSACTIONID = @transactionId";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@transactionId", transactionId);
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                adapter.Fill(receiptData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting receipt data: " + ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return receiptData;
+        }
+
+        public void SaveReceiptToFile(string transactionId, string customerName, string discount, string total, Receipt receiptForm)
+        {
+            try
+            {
+                // Create Receipts folder if it doesn't exist
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string receiptsFolder = Path.Combine(desktopPath, "Receipts");
+
+                if (!Directory.Exists(receiptsFolder))
+                {
+                    Directory.CreateDirectory(receiptsFolder);
+                }
+
+                DataTable receiptData = GetReceiptData(transactionId);
+                StringBuilder receiptContent = new StringBuilder();
+                receiptContent.AppendLine("=== ARGUS STORE RECEIPT ===");
+                receiptContent.AppendLine($"Transaction: {transactionId}");
+                receiptContent.AppendLine($"Date: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                receiptContent.AppendLine($"Customer: {customerName}");
+                receiptContent.AppendLine($"Discount: {discount}");
+                receiptContent.AppendLine("--------------------------");
+
+                foreach (DataRow row in receiptData.Rows)
+                {
+                    receiptContent.AppendLine($"{row["Product"]} x{row["Qty"]} @ {Convert.ToDecimal(row["Price"]):C} = {Convert.ToDecimal(row["Total"]):C}");
+                }
+
+                receiptContent.AppendLine("--------------------------");
+                receiptContent.AppendLine($"TOTAL: {total:C}");
+                receiptContent.AppendLine("=== THANK YOU! ===");
+
+                string textFilePath = Path.Combine(receiptsFolder, $"Receipt_{transactionId}_{DateTime.Now:yyyyMMddHHmmss}.txt");
+                File.WriteAllText(textFilePath, receiptContent.ToString());
+
+                if (receiptForm != null)
+                {
+                    Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+                    receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+
+                    string imageFilePath = Path.Combine(receiptsFolder, $"Receipt_{transactionId}_{DateTime.Now:yyyyMMddHHmmss}.png");
+                    bmp.Save(imageFilePath, System.Drawing.Imaging.ImageFormat.Png);
+                    bmp.Dispose();
+                }
+
+                MessageBox.Show($"Receipt saved to:\n{textFilePath}\nand as image", "Receipt Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving receipt: " + ex.Message);
+            }
         }
     }
 }

@@ -29,5 +29,10 @@ namespace Argus
         {
 
         }
+
+        private void Receipt_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

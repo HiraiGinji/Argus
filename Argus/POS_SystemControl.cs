@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
@@ -28,25 +29,19 @@ namespace Argus
         DatabaseOperations connect = new DatabaseOperations();
         settersGetters sgValues = new settersGetters();
 
+        private string lastScannedBarcode = string.Empty;
+        private DateTime lastScanTime = DateTime.MinValue;
+        private string lastProcessedBarcode = string.Empty;
+        private bool isProcessingBarcode = false;
         int qty = 1;
         double discount = 1;
 
         private void btn_pay_Click(object sender, EventArgs e)
         {
-            string customer = "none";
-
-            if (tb_customer.Text == null)
-            {
-                payBtnFunc(customer);
-            }
-            else if (tb_customer.Text != null)
-            {
-                customer = tb_customer.Text.ToString();
-                payBtnFunc(customer);
-            }
+            string customer = tb_customer.Text ?? "none";
+            payBtnFunc(customer);
 
             DataTable receiptData = new DataTable();
-
             foreach (DataGridViewColumn column in tbl_cart.Columns)
             {
                 receiptData.Columns.Add(column.Name);
@@ -74,15 +69,26 @@ namespace Argus
 
             Receipt receiptForm = new Receipt(receiptData, total, transaction, date, customername, discounttype, discountpercent)
             {
-                StartPosition = FormStartPosition.CenterParent
+                StartPosition = FormStartPosition.CenterParent,
+                Visible = false
             };
 
+            receiptForm.Show();
+            receiptForm.Hide();
+
+            DialogResult result = MessageBox.Show("Transaction completed! Would you like to save the receipt?",
+                "Receipt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                connect.SaveReceiptToFile(transaction, customername, $"{discounttype} {discountpercent}", total, receiptForm);
+            }
+
+            receiptForm.Visible = true;
             receiptForm.FormClosed += (s, args) =>
             {
                 searchFunc();
             };
-
-            receiptForm.ShowDialog();
         }
 
         public void payBtnFunc(string customer)
@@ -158,6 +164,23 @@ namespace Argus
             tbl_cart.Columns.Clear();
         }
 
+        public void Cleanup()
+        {
+            if (VCD != null && VCD.IsRunning)
+            {
+                VCD.SignalToStop();
+                VCD.WaitForStop();
+                VCD = null;
+            }
+
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image.Dispose();
+                pictureBox1.Image = null;
+            }
+        }
+
+
         private void POS_SystemControl_Load(object sender, EventArgs e)
         {
             ClearCart();
@@ -180,8 +203,21 @@ namespace Argus
 
             tbl_cart.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             tbl_cart.AutoSize = false;
-        }
 
+            pictureBox1.Visible = true;
+            FIC = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo device in FIC)
+            {
+                CameraListbox.Items.Add(device.Name);
+            }
+            CameraListbox.SelectedIndex = 0;
+        }
+        private void CameraListbox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
+            VCD.NewFrame += VideoCaptureDevice_NewFrame;
+            VCD.Start();
+        }
         private void tb_pid_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -287,20 +323,84 @@ namespace Argus
         }
         private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
-            BarcodeReader reader = new BarcodeReader();
-            var result = reader.Decode(bitmap);
-            if (result != null)
+
+            try
             {
-                txt_Barcode.Invoke(new MethodInvoker(delegate ()
+                if (eventArgs.Frame == null) return;
+
+                using (Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone())
                 {
-                    txt_Barcode.Text = result.ToString();
-                }));
+                    var reader = new BarcodeReader();
+                    var result = reader.Decode(bitmap);
+
+                    if (result != null && txt_Barcode != null && !txt_Barcode.IsDisposed)
+                    {
+                        string currentBarcode = result.ToString();
+                        DateTime currentTime = DateTime.Now;
+
+                        if (currentBarcode != lastScannedBarcode ||
+                            (currentTime - lastScanTime).TotalSeconds > 2)
+                        {
+                            txt_Barcode.Invoke((MethodInvoker)delegate
+                            {
+                                if (txt_Barcode != null && !txt_Barcode.IsDisposed)
+                                {
+                                    txt_Barcode.Text = currentBarcode;
+                                    lastScannedBarcode = currentBarcode;
+                                    lastScanTime = currentTime;
+                                    PassBarcode();
+                                }
+                            });
+                        }
+                    }
+
+                    if (pictureBox1 != null && !pictureBox1.IsDisposed)
+                    {
+                        pictureBox1.Invoke((MethodInvoker)delegate
+                        {
+                            if (pictureBox1 != null && !pictureBox1.IsDisposed)
+                            {
+                                pictureBox1.Image?.Dispose();
+                                pictureBox1.Image = (Bitmap)bitmap.Clone();
+                            }
+                        });
+                    }
+                }
             }
-            pictureBox1.Image = bitmap;
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Barcode scan error: {ex.Message}");
+            }
         }
 
         private void tbl_cart_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CameraListbox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
+            VCD.NewFrame += VideoCaptureDevice_NewFrame;
+            VCD.Start();
+        }
+
+        private void txt_Barcode_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void POS_SystemControl_Leave(object sender, EventArgs e)
+        {
+            Cleanup();
+            base.Dispose();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

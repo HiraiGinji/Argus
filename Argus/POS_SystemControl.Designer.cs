@@ -31,7 +31,10 @@
             this.lbl_itemPrice = new System.Windows.Forms.Label();
             this.lbl_date = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txt_Barcode = new System.Windows.Forms.TextBox();
+            this.CameraListbox = new System.Windows.Forms.ComboBox();
             this.cb_discount = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.lbl_total = new System.Windows.Forms.Label();
             this.lbl_discount = new System.Windows.Forms.Label();
@@ -52,14 +55,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbl_cart = new System.Windows.Forms.DataGridView();
-            this.CameraListbox = new System.Windows.Forms.ComboBox();
-            this.txt_Barcode = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_cart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_itemPrice
@@ -94,7 +94,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txt_Barcode);
+            this.panel2.Controls.Add(this.CameraListbox);
             this.panel2.Controls.Add(this.cb_discount);
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.lbl_total);
             this.panel2.Controls.Add(this.lbl_discount);
@@ -110,6 +113,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(327, 625);
             this.panel2.TabIndex = 117;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // txt_Barcode
+            // 
+            this.txt_Barcode.Enabled = false;
+            this.txt_Barcode.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Barcode.Location = new System.Drawing.Point(21, 397);
+            this.txt_Barcode.Name = "txt_Barcode";
+            this.txt_Barcode.Size = new System.Drawing.Size(285, 35);
+            this.txt_Barcode.TabIndex = 114;
+            this.txt_Barcode.TextChanged += new System.EventHandler(this.txt_Barcode_TextChanged);
+            // 
+            // CameraListbox
+            // 
+            this.CameraListbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CameraListbox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CameraListbox.FormattingEnabled = true;
+            this.CameraListbox.Location = new System.Drawing.Point(22, 275);
+            this.CameraListbox.Name = "CameraListbox";
+            this.CameraListbox.Size = new System.Drawing.Size(285, 38);
+            this.CameraListbox.TabIndex = 115;
+            this.CameraListbox.SelectedIndexChanged += new System.EventHandler(this.CameraListbox_SelectedIndexChanged_1);
             // 
             // cb_discount
             // 
@@ -121,11 +146,21 @@
             "Regular",
             "PWD",
             "Senior Citizen"});
-            this.cb_discount.Location = new System.Drawing.Point(136, 468);
+            this.cb_discount.Location = new System.Drawing.Point(136, 495);
             this.cb_discount.Name = "cb_discount";
             this.cb_discount.Size = new System.Drawing.Size(177, 33);
             this.cb_discount.TabIndex = 78;
             this.cb_discount.SelectedIndexChanged += new System.EventHandler(this.cb_discount_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(22, 303);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(285, 129);
+            this.pictureBox1.TabIndex = 113;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label15
             // 
@@ -133,7 +168,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(16, 468);
+            this.label15.Location = new System.Drawing.Point(16, 495);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(105, 25);
             this.label15.TabIndex = 77;
@@ -184,7 +219,7 @@
             this.tb_customer.BackColor = System.Drawing.SystemColors.Control;
             this.tb_customer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tb_customer.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold);
-            this.tb_customer.Location = new System.Drawing.Point(136, 421);
+            this.tb_customer.Location = new System.Drawing.Point(136, 448);
             this.tb_customer.Name = "tb_customer";
             this.tb_customer.Size = new System.Drawing.Size(177, 33);
             this.tb_customer.TabIndex = 72;
@@ -210,7 +245,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(16, 423);
+            this.label10.Location = new System.Drawing.Point(16, 450);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 25);
             this.label10.TabIndex = 65;
@@ -373,59 +408,26 @@
             this.tbl_cart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_cart_CellContentClick);
             this.tbl_cart.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_cart_CellDoubleClick);
             // 
-            // CameraListbox
-            // 
-            this.CameraListbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CameraListbox.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CameraListbox.FormattingEnabled = true;
-            this.CameraListbox.Location = new System.Drawing.Point(593, 489);
-            this.CameraListbox.Name = "CameraListbox";
-            this.CameraListbox.Size = new System.Drawing.Size(379, 38);
-            this.CameraListbox.TabIndex = 115;
-            this.CameraListbox.Visible = false;
-            // 
-            // txt_Barcode
-            // 
-            this.txt_Barcode.Enabled = false;
-            this.txt_Barcode.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Barcode.Location = new System.Drawing.Point(586, 645);
-            this.txt_Barcode.Name = "txt_Barcode";
-            this.txt_Barcode.Size = new System.Drawing.Size(379, 35);
-            this.txt_Barcode.TabIndex = 114;
-            this.txt_Barcode.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(366, 429);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(407, 210);
-            this.pictureBox1.TabIndex = 113;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            // 
             // POS_SystemControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tbl_cart);
-            this.Controls.Add(this.CameraListbox);
-            this.Controls.Add(this.txt_Barcode);
             this.Name = "POS_SystemControl";
             this.Size = new System.Drawing.Size(1121, 655);
             this.Load += new System.EventHandler(this.POS_SystemControl_Load);
+            this.Leave += new System.EventHandler(this.POS_SystemControl_Leave);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_cart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

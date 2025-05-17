@@ -124,5 +124,17 @@ namespace Argus
             VCD.NewFrame += VideoCaptureDevice_NewFrame;
             VCD.Start();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CameraListbox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
+            VCD.NewFrame += VideoCaptureDevice_NewFrame;
+            VCD.Start();
+        }
     }
 }

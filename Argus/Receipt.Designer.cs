@@ -254,6 +254,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Receipt";
             this.Text = "Receipt";
+            this.Load += new System.EventHandler(this.Receipt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
