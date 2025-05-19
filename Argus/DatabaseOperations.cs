@@ -858,41 +858,76 @@ namespace Argus
         }
         public void prodDetails(string pid, int qty, string transaction)
         {
-            DataTable search = new DataTable();
             try
             {
                 OpenConnection();
 
-                MySqlCommand itemExists = new MySqlCommand($"SELECT COUNT(*) FROM INVENTORY WHERE PID = '{pid}'", connection);
-                int exists = Convert.ToInt32(itemExists.ExecuteScalar());
+                MySqlCommand checkCmd = new MySqlCommand(
+                    "SELECT COUNT(*) FROM POS_CART WHERE TRANSACTIONID = @transaction AND PID = @pid",
+                    connection);
+                checkCmd.Parameters.AddWithValue("@transaction", transaction);
+                checkCmd.Parameters.AddWithValue("@pid", pid);
 
-                if (exists == 0)
+                int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                if (exists > 0)
                 {
-                    MessageBox.Show("Invalid Entry");
+                    MySqlCommand updateCmd = new MySqlCommand(
+                        "UPDATE POS_CART SET QUANTITY = QUANTITY + @qty, TOTAL = TOTAL + (@price * @qty) " +
+                        "WHERE TRANSACTIONID = @transaction AND PID = @pid",
+                        connection);
+
+                    decimal price = GetProductPrice(pid);
+
+                    updateCmd.Parameters.AddWithValue("@qty", qty);
+                    updateCmd.Parameters.AddWithValue("@price", price);
+                    updateCmd.Parameters.AddWithValue("@transaction", transaction);
+                    updateCmd.Parameters.AddWithValue("@pid", pid);
+
+                    updateCmd.ExecuteNonQuery();
                 }
-                else if (exists == 1)
+                else
                 {
-                    MySqlCommand cmd = new MySqlCommand($"SELECT PNAME, ITEMPRICE FROM INVENTORY WHERE PID = '{pid}'", connection);
-                    MySqlDataReader reader = cmd.ExecuteReader();
+                    MySqlCommand cmd = new MySqlCommand(
+                        "SELECT PNAME, ITEMPRICE FROM INVENTORY WHERE PID = @pid",
+                        connection);
+                    cmd.Parameters.AddWithValue("@pid", pid);
 
-                    if (reader.Read())
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        string pname = reader["PNAME"].ToString();
-                        decimal price = Convert.ToDecimal(reader["ITEMPRICE"]);
-                        decimal total = qty * price;
+                        if (reader.Read())
+                        {
+                            string pname = reader["PNAME"].ToString();
+                            decimal price = Convert.ToDecimal(reader["ITEMPRICE"]);
+                            decimal total = qty * price;
 
-                        reader.Close();
+                            reader.Close();
 
-                        MySqlCommand cmdPos = new MySqlCommand($"INSERT INTO POS_CART VALUES ('{transaction}', '{pid}', '{pname}', {qty}, {price}, {total})", connection);
-                        cmdPos.ExecuteNonQuery();
+                            MySqlCommand insertCmd = new MySqlCommand(
+                                "INSERT INTO POS_CART (TRANSACTIONID, PID, PNAME, QUANTITY, PRICE, TOTAL) " +
+                                "VALUES (@transaction, @pid, @pname, @qty, @price, @total)",
+                                connection);
+
+                            insertCmd.Parameters.AddWithValue("@transaction", transaction);
+                            insertCmd.Parameters.AddWithValue("@pid", pid);
+                            insertCmd.Parameters.AddWithValue("@pname", pname);
+                            insertCmd.Parameters.AddWithValue("@qty", qty);
+                            insertCmd.Parameters.AddWithValue("@price", price);
+                            insertCmd.Parameters.AddWithValue("@total", total);
+
+                            insertCmd.ExecuteNonQuery();
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error updating cart: " + ex.Message);
             }
-            finally { CloseConnection(); }
+            finally
+            {
+                CloseConnection();
+            }
         }
         public DataTable GetReceiptData(string transactionId)
         {
@@ -918,6 +953,22 @@ namespace Argus
             return receiptData;
         }
 
+        private decimal GetProductPrice(string pid)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT ITEMPRICE FROM INVENTORY WHERE PID = @pid",
+                    connection);
+                cmd.Parameters.AddWithValue("@pid", pid);
+
+                return Convert.ToDecimal(cmd.ExecuteScalar());
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         public void SaveReceiptToFile(string transactionId, string customerName, string discount, string total, Receipt receiptForm)
         {
             try

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -103,19 +104,68 @@ namespace Argus
             receiptForm.Show();
             receiptForm.Hide();
 
-            DialogResult result = MessageBox.Show("Transaction completed! Would you like to save the receipt?",
-                "Receipt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show("Transaction completed! Would you like to print the receipt?",
+                                       "Receipt",
+                                       MessageBoxButtons.YesNo,
+                                       MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                connect.SaveReceiptToFile(transaction, customername, $"{discounttype} {discountpercent}", total, receiptForm);
+                PrintReceipt(receiptForm);
+                connect.SaveReceiptToFile(transaction, customername, $"{discounttype} {discountpercent}",
+                          total, receiptForm);
+            }
+            else
+            {
+                result = MessageBox.Show("Would you like to save the receipt instead?",
+                                       "Save Receipt",
+                                       MessageBoxButtons.YesNo,
+                                       MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    connect.SaveReceiptToFile(transaction, customername, $"{discounttype} {discountpercent}",
+                                            total, receiptForm);
+                }
             }
 
             receiptForm.Visible = true;
-            receiptForm.FormClosed += (s, args) =>
+            receiptForm.FormClosed += (s, args) => { searchFunc(); };
+        }
+
+        private void PrintReceipt(Receipt receiptForm)
+        {
+            try
             {
-                searchFunc();
-            };
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += (sender, e) =>
+                {
+                    Bitmap bmp = new Bitmap(receiptForm.Width, receiptForm.Height);
+                    receiptForm.DrawToBitmap(bmp, new Rectangle(0, 0, receiptForm.Width, receiptForm.Height));
+
+                    float aspectRatio = (float)bmp.Width / (float)bmp.Height;
+
+                    RectangleF printableArea = e.MarginBounds;
+                    printableArea.Height = printableArea.Width / aspectRatio;
+
+                    e.Graphics.DrawImage(bmp, printableArea);
+
+                    bmp.Dispose();
+                };
+
+                PrintDialog printDialog = new PrintDialog();
+                printDialog.Document = pd;
+
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pd.Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error printing receipt: {ex.Message}", "Print Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void payBtnFunc(string customer)
@@ -449,6 +499,12 @@ namespace Argus
 
         private void CameraListbox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            if (VCD != null && VCD.IsRunning)
+            {
+                VCD.SignalToStop();
+                VCD.WaitForStop();
+            }
+
             VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
             VCD.NewFrame += VideoCaptureDevice_NewFrame;
             VCD.Start();
@@ -460,6 +516,11 @@ namespace Argus
 
         private void POS_SystemControl_Leave(object sender, EventArgs e)
         {
+            if (VCD != null && VCD.IsRunning)
+            {
+                VCD.SignalToStop();
+                VCD.WaitForStop();
+            }
             Cleanup();
             base.Dispose();
         }
@@ -508,7 +569,7 @@ namespace Argus
                 }
                 else
                 {
-                    lbl_change.Text = "Insufficient";
+                    lbl_change.Text = "Invalid";
                 }
             }
             else

@@ -111,14 +111,22 @@ namespace Argus
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             BarcodeReader reader = new BarcodeReader();
             var result = reader.Decode(bitmap);
-            if (result != null)
+
+            if (result != null && txt_Barcode != null && txt_Barcode.IsHandleCreated)
             {
                 txt_Barcode.Invoke(new MethodInvoker(delegate ()
                 {
-                    txt_Barcode.Text = result.ToString();
+                    if (txt_Barcode != null && !txt_Barcode.IsDisposed)
+                    {
+                        txt_Barcode.Text = result.ToString();
+                    }
                 }));
             }
-            pictureBox1.Image = bitmap;
+
+            if (pictureBox1 != null && !pictureBox1.IsDisposed)
+            {
+                pictureBox1.Image = bitmap;
+            }
         }
         private void CameraListbox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -134,6 +142,12 @@ namespace Argus
 
         private void CameraListbox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            if (VCD != null && VCD.IsRunning)
+            {
+                VCD.SignalToStop();
+                VCD.WaitForStop();
+            }
+
             VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
             VCD.NewFrame += VideoCaptureDevice_NewFrame;
             VCD.Start();
@@ -142,6 +156,20 @@ namespace Argus
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void CameraListbox_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchUserControl_Leave(object sender, EventArgs e)
+        {
+            if (VCD != null && VCD.IsRunning)
+            {
+                VCD.SignalToStop();
+                VCD.WaitForStop();
+            }
         }
     }
 }
