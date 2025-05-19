@@ -922,7 +922,6 @@ namespace Argus
         {
             try
             {
-                // Create Receipts folder if it doesn't exist
                 string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 string receiptsFolder = Path.Combine(desktopPath, "Receipts");
 
@@ -937,7 +936,15 @@ namespace Argus
                 receiptContent.AppendLine($"Transaction: {transactionId}");
                 receiptContent.AppendLine($"Date: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
                 receiptContent.AppendLine($"Customer: {customerName}");
+                receiptContent.AppendLine($"Cashier: {receiptForm.lbl_cashier.Text}");
                 receiptContent.AppendLine($"Discount: {discount}");
+
+                decimal totalAmount = decimal.Parse(total);
+                decimal vatAmount = Math.Round(totalAmount / 1.12m * 0.12m, 2);
+                decimal subtotal = totalAmount - vatAmount;
+
+                receiptContent.AppendLine($"Subtotal: {subtotal:C}");
+                receiptContent.AppendLine($"VAT (12%): {vatAmount:C}");
                 receiptContent.AppendLine("--------------------------");
 
                 foreach (DataRow row in receiptData.Rows)

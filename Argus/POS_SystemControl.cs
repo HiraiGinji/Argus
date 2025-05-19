@@ -29,6 +29,8 @@ namespace Argus
         DatabaseOperations connect = new DatabaseOperations();
         settersGetters sgValues = new settersGetters();
 
+        private const decimal TAX_RATE = 0.12m;
+        private decimal taxAmount = 0;
         private string lastScannedBarcode = string.Empty;
         private DateTime lastScanTime = DateTime.MinValue;
         private string lastProcessedBarcode = string.Empty;
@@ -87,8 +89,12 @@ namespace Argus
             string customername = tb_customer.Text;
             string discounttype = cb_discount.SelectedItem.ToString();
             string discountpercent = lbl_discount.Text;
+            string taxAmountStr = taxAmount.ToString();
+            string cashierName = sgValues.sg_user;
 
-            Receipt receiptForm = new Receipt(receiptData, total, transaction, date, customername, discounttype, discountpercent)
+            Receipt receiptForm = new Receipt(receiptData, total, transaction, date,
+                                             customername, discounttype, discountpercent,
+                                             taxAmountStr, cashierName)
             {
                 StartPosition = FormStartPosition.CenterParent,
                 Visible = false
@@ -339,10 +345,14 @@ namespace Argus
         public void totalPrice()
         {
             decimal subtotal = Convert.ToDecimal(lbl_subtotal.Text);
-            decimal total = subtotal * Convert.ToDecimal(discount);
+            decimal discountedAmount = subtotal * Convert.ToDecimal(discount);
+            decimal vatAmount = discountedAmount * 0.12m;
+            taxAmount = vatAmount;
+            decimal total = discountedAmount + vatAmount;
             decimal roundedTotal = Math.Round(total, 2);
 
-            lbl_total.Text = roundedTotal.ToString();
+            lbl_total.Text = roundedTotal.ToString("0.00");
+
         }
 
 
@@ -528,6 +538,11 @@ namespace Argus
                 tb_pid.Focus();
                 e.Handled = true;
             }
+        }
+
+        private void lbl_discount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Argus
         {
             InitializeComponent();
         }
+
+
         FilterInfoCollection FIC;
         VideoCaptureDevice VCD;
 
@@ -135,6 +137,11 @@ namespace Argus
             VCD = new VideoCaptureDevice(FIC[CameraListbox.SelectedIndex].MonikerString);
             VCD.NewFrame += VideoCaptureDevice_NewFrame;
             VCD.Start();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

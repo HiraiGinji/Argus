@@ -33,6 +33,7 @@ namespace Argus
 
         private void SideBarTimer_Tick(object sender, EventArgs e)
         {
+            Application.DoEvents();
             if (SidebarExtend)
             {
                 Sidebar.Width -= 10;
@@ -108,9 +109,19 @@ namespace Argus
 
         }
         
+
         private void header_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void ContentPanel_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            var oldControl = e.Control;
+            if (oldControl != null)
+            {
+                oldControl.Dispose();
+            }
         }
     }
 }
